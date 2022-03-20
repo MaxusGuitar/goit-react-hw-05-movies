@@ -1,5 +1,6 @@
 import { NavLink, Outlet } from "react-router-dom";
 import style from "./Navigation.module.scss";
+import { Toaster } from "react-hot-toast";
 
 export const Navigation = () => {
   return (
@@ -23,6 +24,7 @@ export const Navigation = () => {
         Movies
       </NavLink>
       <Outlet />
+      <Toaster />
     </nav>
   );
 };

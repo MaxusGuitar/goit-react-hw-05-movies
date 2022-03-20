@@ -1,8 +1,10 @@
 import { useState, useEffect, useRef } from "react";
-import { useLocation, useParams, Outlet } from "react-router-dom";
+import { useParams, Navigate } from "react-router-dom";
 import { getMoveItem } from "../servises/getFilm";
-
+import toast from "react-hot-toast";
 import { Load } from "../components/Load/Load";
+import { Link } from "react-router-dom";
+import { FaArrowLeft } from "react-icons/fa";
 
 const noPosterImg =
   "https://sd.keepcalms.com/i/sorry-no-picture-available-2.png";
@@ -36,7 +38,7 @@ export function MovieDetailsPage() {
         });
       })
       .catch((error) => {
-        setError(error);
+        return toast.error("There is no movie on this page!");
       })
       .finally(() =>
         setTimeout(() => {
@@ -48,6 +50,10 @@ export function MovieDetailsPage() {
   return (
     <main>
       {load && <Load />}
+      <Link to="/preview">
+        <FaArrowLeft />
+        Back
+      </Link>
       {!error && (
         <div>
           <img
