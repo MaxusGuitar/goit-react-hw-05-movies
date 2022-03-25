@@ -8,10 +8,10 @@ export function App() {
   return (
     <Routes>
       <Route path="/" element={<Navigation />}>
-        <Route path="preview" element={<HomeView />} />
+        <Route path="/" element={<HomeView />} />
         <Route path="movies" element={<div>sdfdsf</div>} />
         <Route path="/movies/:moviesId" element={<MovieDetailsPage />} />
-        <Route path="*" element={<Navigate to="preview" />} />
+        <Route path="*" element={<Navigate to="/" />} />
       </Route>
     </Routes>
   );
