@@ -44,5 +44,5 @@ export const MovieDetails = () => {
       );
   }, [moviesId]);
 
-  return { load, error, item };
+  return { load, error, item, setLoad, setItem };
 };

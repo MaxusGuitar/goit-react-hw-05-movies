@@ -10,3 +10,11 @@ export async function getTrend() {
 export async function getMoveItem(movie_id) {
   return await axios.get(`${BASE_URL}/movie/${movie_id}y?api_key=${API_KEY}`);
 }
+
+export async function getMoveItemSearch(search_film) {
+  return await axios.get(
+    `${BASE_URL}/search/movie?api_key=${API_KEY}&language=en-US&page=${search_film}&include_adult=false`
+  );
+}
+
+//https://api.themoviedb.org/3/search/movie?api_key=<<api_key>>&language=en-US&page=1&include_adult=false
