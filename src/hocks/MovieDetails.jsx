@@ -11,6 +11,7 @@ export const MovieDetails = () => {
   const [item, setItem] = useState([]);
   const [load, setLoad] = useState(false);
   const [error, setError] = useState(null);
+  const noImg = "../img/noimg.png";
 
   useEffect(() => {
     setLoad(true);
@@ -44,5 +45,5 @@ export const MovieDetails = () => {
       );
   }, [moviesId]);
 
-  return { load, error, item, setLoad, setItem };
+  return { noImg, load, error, item, setLoad, setItem };
 };

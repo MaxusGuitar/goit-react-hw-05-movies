@@ -13,7 +13,7 @@ export async function getMoveItem(movie_id) {
 
 export async function getMoveItemSearch(search_film) {
   return await axios.get(
-    `${BASE_URL}/search/movie?api_key=${API_KEY}&language=en-US&page=${search_film}&include_adult=false`
+    `${BASE_URL}/search/movie?api_key=${API_KEY}&query=${search_film}&language=en-US&include_adult=false`
   );
 }
 

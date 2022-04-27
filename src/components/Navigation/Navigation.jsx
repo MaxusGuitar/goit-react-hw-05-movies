@@ -2,7 +2,7 @@ import { NavLink, Outlet } from "react-router-dom";
 import style from "./Navigation.module.scss";
 import { Toaster } from "react-hot-toast";
 
-export const Navigation = () => {
+export default function Navigation() {
   return (
     <nav>
       <NavLink
@@ -27,4 +27,4 @@ export const Navigation = () => {
       <Toaster />
     </nav>
   );
-};
+}

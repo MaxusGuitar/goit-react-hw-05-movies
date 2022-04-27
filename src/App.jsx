@@ -1,19 +1,23 @@
 import { Route, Routes, Navigate } from "react-router-dom";
-import { Navigation } from "./components/Navigation";
-import { MovieDetailsPage } from "./views/MovieDetailsPage";
-import { HomeView } from "./views/HomeView";
-import { Movie } from "./views/Movie";
+import { lazy, Suspense } from "react";
 import "./App.css";
+
+const Movie = lazy(() => import("./views/Movie.jsx"));
+const HomeView = lazy(() => import("./views/HomeView.jsx"));
+const MovieDetailsPage = lazy(() => import("./views/MovieDetailsPage.jsx"));
+const Navigation = lazy(() => import("./components/Navigation/Navigation.jsx"));
 
 export function App() {
   return (
-    <Routes>
-      <Route path="/" element={<Navigation />}>
-        <Route path="/" element={<HomeView />} />
-        <Route path="movies" element={<Movie />} />
-        <Route path="/movies/:moviesId" element={<MovieDetailsPage />} />
-        <Route path="*" element={<Navigate to="/" />} />
-      </Route>
-    </Routes>
+    <Suspense fallback={<h1>Loading...</h1>}>
+      <Routes>
+        <Route path="/" element={<Navigation />}>
+          <Route index element={<HomeView />} />
+          <Route path="movies" element={<Movie />} />
+          <Route path="/movies/:moviesId" element={<MovieDetailsPage />} />
+          <Route path="*" element={<Navigate to="/" />} />
+        </Route>
+      </Routes>
+    </Suspense>
   );
 }

@@ -3,8 +3,8 @@ import { FaArrowLeft } from "react-icons/fa";
 import { Load } from "../components/Load/Load";
 import { MovieDetails } from "../hocks";
 
-export function MovieDetailsPage() {
-  const { load, error, item } = MovieDetails();
+export default function MovieDetailsPage() {
+  const { load, error, item, noImg } = MovieDetails();
 
   return (
     <main>
@@ -15,10 +15,15 @@ export function MovieDetailsPage() {
       </Link>
       {!error && (
         <div>
-          <img
-            src={item.poster_path}
-            alt={item.title ? item.title : item.name}
-          />
+          {item.poster_path ? (
+            <img
+              src={`https://image.tmdb.org/t/p/w300${item.poster_path}`}
+              alt=""
+              min-width={"100px"}
+            />
+          ) : (
+            <img src={noImg} alt="" />
+          )}
           <h1>{item.title ? item.title : item.name}</h1>
           <p>User Score: {item.vote_average}%</p>
           <h2>Overview</h2>

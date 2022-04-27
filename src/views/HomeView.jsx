@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import { getTrend } from "../servises/getFilm";
 import { Load } from "../components/Load/Load";
 
-export function HomeView() {
+export default function HomeView() {
   const [movies, setMovies] = useState([]);
   const [load, setLoad] = useState(false);
   const [error, setError] = useState(null);

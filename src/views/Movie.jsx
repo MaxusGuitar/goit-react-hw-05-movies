@@ -6,10 +6,10 @@ import { getMoveItemSearch } from "../servises/getFilm";
 //import style from "./Navigation.module.scss";
 import { Toaster } from "react-hot-toast";
 
-export const Movie = () => {
+export default function Movie() {
   const [searchParams, setSearchParams] = useSearchParams();
   const { item, load, setLoad, setItem, error } = MovieDetails();
-  const currentItemPos = searchParams.get("search_film");
+  //const currentItemPos = searchParams.get("search_film");
 
   const find_movie = (fromData) => {
     setSearchParams({ search_film: fromData });
@@ -49,4 +49,4 @@ export const Movie = () => {
       )}
     </div>
   );
-};
+}
