@@ -1,15 +1,21 @@
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { FaArrowLeft } from "react-icons/fa";
 import { Load } from "../components/Load/Load";
 import { MovieDetails } from "../hocks";
+import { useRef } from "react";
 
 export default function MovieDetailsPage() {
   const { load, error, item, noImg } = MovieDetails();
+  const location = useLocation();
+  const backPage = useRef(location);
 
   return (
     <main>
       {load && <Load />}
-      <Link to="/">
+      <Link
+        to={backPage.current?.state?.from ?? `/`}
+        state={{ from: backPage.current }}
+      >
         <FaArrowLeft />
         Back
       </Link>

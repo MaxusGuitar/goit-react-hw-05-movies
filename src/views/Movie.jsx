@@ -2,6 +2,7 @@ import {
   NavLink,
   Outlet,
   useLocation,
+  useNavigate,
   useSearchParams,
 } from "react-router-dom";
 import { Link } from "react-router-dom";
@@ -21,8 +22,8 @@ export default function Movie() {
   const currentItemPos = searchParams.get("search_film");
   const location = useLocation();
 
-  const find_movie = (item) => {
-    setSearchParams({ search_film: item });
+  const find_movie = (e) => {
+    setSearchParams({ search_film: e });
   };
 
   useEffect(() => {

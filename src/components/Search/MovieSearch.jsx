@@ -5,7 +5,7 @@ export default function MovieSearch({ submitValue }) {
   const { searchValue, setSearchValue } = useState("");
 
   const handleChange = (e) => {
-    const v = e.currentTarget.value.toLowerCase();
+    const v = e.currentTarget.elements.query.value;
 
     setSearchValue(v);
   };
