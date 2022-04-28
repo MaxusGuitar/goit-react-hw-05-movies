@@ -24,7 +24,6 @@ export const MovieDetails = () => {
 
         setItem({
           poster_path,
-
           title,
           name,
           overview,
@@ -45,5 +44,5 @@ export const MovieDetails = () => {
       );
   }, [moviesId]);
 
-  return { noImg, load, error, item, setLoad, setItem };
+  return { noImg, load, setError, item, setLoad, setItem };
 };

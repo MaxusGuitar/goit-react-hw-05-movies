@@ -1,52 +1,74 @@
-import { NavLink, Outlet, useSearchParams } from "react-router-dom";
+import {
+  NavLink,
+  Outlet,
+  useLocation,
+  useSearchParams,
+} from "react-router-dom";
 import { Link } from "react-router-dom";
-import { useEffect } from "react";
-import { MovieDetails } from "../hocks";
+import { useEffect, useState } from "react";
+//import { MovieDetails } from "../hocks";
 import { getMoveItemSearch } from "../servises/getFilm";
+import MovieSearch from "../components/Search/MovieSearch";
+import { Load } from "../components/Load/Load";
 //import style from "./Navigation.module.scss";
-import { Toaster } from "react-hot-toast";
+import toast from "react-hot-toast";
 
 export default function Movie() {
   const [searchParams, setSearchParams] = useSearchParams();
-  const { item, load, setLoad, setItem, error } = MovieDetails();
-  //const currentItemPos = searchParams.get("search_film");
+  const [item, setItem] = useState([]);
+  const [load, setLoad] = useState(false);
+  const [error, setError] = useState(null);
+  const currentItemPos = searchParams.get("search_film");
+  const location = useLocation();
 
-  const find_movie = (fromData) => {
-    setSearchParams({ search_film: fromData });
+  const find_movie = (item) => {
+    setSearchParams({ search_film: item });
   };
 
   useEffect(() => {
-    setLoad(true);
-    async function searchMovies() {
-      try {
-        getMoveItemSearch().then((data) => {
+    if (currentItemPos === "") {
+      return;
+    }
+
+    if (currentItemPos) {
+      setLoad(true);
+
+      getMoveItemSearch(currentItemPos)
+        .then((data) => {
           const {
             data: { results },
           } = data;
+          if (results.length === 0) {
+            return toast.error(
+              "Sorry, there are no movies. Try another request..."
+            );
+          }
           setItem(results);
+        })
+        .catch((error) => {
+          setError(error);
+        })
+        .finally(() => {
+          setTimeout(() => {
+            setLoad(false);
+          }, 1000);
         });
-      } catch (error) {
-      } finally {
-        setTimeout(() => {
-          setLoad(false);
-        }, 1000);
-      }
     }
-    searchMovies();
-  }, []);
+  }, [currentItemPos]);
 
   return (
     <div>
-      <input onSubmit={find_movie} type="text" />
-      {!error && (
-        <ul>
-          {item.map((i) => (
-            <li key={i.id}>
-              <Link to={`/movies/${i.id}`}>{i.original_title}</Link>
-            </li>
-          ))}
-        </ul>
-      )}
+      <MovieSearch submitValue={find_movie} />
+      {load && <Load />}
+      <ul>
+        {item.map(({ id, title, name }) => (
+          <li key={id}>
+            <Link to={`${id}`} state={{ from: location }}>
+              {title ? title : name}
+            </Link>
+          </li>
+        ))}
+      </ul>
     </div>
   );
 }

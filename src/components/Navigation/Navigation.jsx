@@ -6,7 +6,7 @@ export default function Navigation() {
   return (
     <nav>
       <NavLink
-        to="/preview"
+        to="/"
         className={style.nav_link}
         style={({ isActive }) => ({
           color: isActive ? "rgb(0, 4, 255)" : "rgb(44, 44, 44)",

@@ -1,6 +1,7 @@
 import { Route, Routes, Navigate } from "react-router-dom";
 import { lazy, Suspense } from "react";
 import "./App.css";
+import { item } from "./hocks/MovieDetails";
 
 const Movie = lazy(() => import("./views/Movie.jsx"));
 const HomeView = lazy(() => import("./views/HomeView.jsx"));
